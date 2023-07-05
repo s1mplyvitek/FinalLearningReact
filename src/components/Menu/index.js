@@ -60,7 +60,7 @@ const Menu = () => {
     ];
 
     return (
-        <div className="grid grid-cols-3 gap-5 p-5">
+        <div className="grid grid-cols-4 gap-5 p-5">
             {menu.map(item => <DishCard dish={item} />)}
         </div>
     );

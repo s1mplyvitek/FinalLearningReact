@@ -3,6 +3,7 @@ import AllDish from "../AllDish";
 import Image from "../Image";
 import OneDish from "../OneDish";
 import imgS from "../../hw.jpg"
+import ConstIngr from "../ConstIngr";
 
 const Main = () => {
 
@@ -90,6 +91,10 @@ const Main = () => {
       })}
 ================================
       <p>Hello World! <br/> {a}</p>
+
+================================
+
+      <div className=""><ConstIngr ingri={dish}/></div>
 
 ================================
 
