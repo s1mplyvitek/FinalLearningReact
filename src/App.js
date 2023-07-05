@@ -1,22 +1,15 @@
 import { useState } from 'react';
 import './App.css';
-import Image from './components/Image';
+import Image from './hw1/Image';
 import imgS from "./hw.jpg";
-import OneDish from './components/OneDish';
-import AllDish from './components/AllDish';
+import OneDish from './hw1/OneDish';
+import AllDish from './hw1/AllDish';
+import Menu from './components/Menu';
+import Main from './hw1/Main';
 
 
 function App() {
-  let [a, setA] = useState(0);
-
-  setTimeout(() => {
-    setA(a + 1);
-  }, 1000);
-  // =======================================
-  let items = [
-    { imgSrc: imgS, text: "1" },
-    { imgSrc: imgS, text: "2" },
-  ];
+ 
   // =======================================
   let dish = [
 
@@ -76,27 +69,14 @@ function App() {
   ];
   // ==========================================
   return (
-    <div className="App">
-===============================
-      <OneDish one={dish} />
-===============================
 
-      {dish.map((item) => {
-        return (
-          <AllDish all={item} />
-        );
-      })}
-================================
-      <p>Hello World! <br/> {a}</p>
-
-================================
-
+    <div className="App container mx-auto">
 
       <div>
-        {items.map((item) => {
-          return <Image imgSrc={item.imgSrc} text={item.text} />
-        })}
+        <Menu />
+        <Main />
       </div>
+
     </div>
   );
 }
