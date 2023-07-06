@@ -1,10 +1,18 @@
-const DishCard = ({ dish }) => {
+import style from "./DishCard.module.css"
+
+const DishCard = ({ dish, onClickBuy = () => {} }) => {
     return (
-        <div className=" rounded overflow-hidden shadow-lg">
-            <img src={dish.image} className="container" />
-            <div className="text-3xl">{dish.name}</div>
-            <div>{dish.ingridients.join(", ")} </div>             
+        <div className={" rounded overflow-hidden shadow-lg xl:bg-slate-200 " + style.card}>
+            <div><img src={dish.image} className="container" /></div>
+            <div className="p-2">
+                <div className="text-3xl">{dish.name}</div>
+                <div>{dish.ingridients.join(", ")} </div>
+                <button onClick={() => onClickBuy(dish)} class="w-full bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                    Take me!
+                </button>
+            </div>
         </div>
+
     );
 };
 

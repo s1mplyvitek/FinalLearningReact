@@ -1,81 +1,44 @@
 import { useState } from 'react';
 import './App.css';
-import Image from './hw1/Image';
-import imgS from "./hw.jpg";
-import OneDish from './hw1/OneDish';
-import AllDish from './hw1/AllDish';
 import Menu from './components/Menu';
 import Main from './hw1/Main';
+import DarkThemeSwitcher from './components/DarkThemeSwithcer';
 
 
 function App() {
- 
   // =======================================
-  let dish = [
+  const [themeDark, setThemeDark] = useState(false);
 
-    {
-      id: 1,
-      name: 'Buuzas',
-      price: 70,
-      expense: 0,
-      ingridients: ['meat', 'water', 'solt', 'onion', 'dough',],
-      image: "/content/face.png",
-    },
+  const setDarkTheme = (value) => {
+    setThemeDark(value);
+  };
+  // =======================================
+  const [card, setCard] = useState([]);
 
-    {
-      id: 2,
-      name: 'Shulen',
-      price: 100,
-      expense: 0,
-      ingridients: ['meat', 'water', 'solt',],
-      image: "/content/face.png",
-    },
-
-    {
-      id: 3,
-      name: 'Brtuch',
-      price: 150,
-      expense: 0,
-      ingridients: ['salad', 'bread', 'meat', 'sauce', 'cheese'],
-      image: "/content/face.png",
-    },
-
-    {
-      id: 4,
-      name: 'Classic salad',
-      price: 60,
-      expense: 0,
-      ingridients: ['salad', 'onion', 'solt', 'cucmber', 'tomato'],
-      image: "/content/face.png",
-    },
-
-    {
-      id: 5,
-      name: 'Cofee',
-      price: 50,
-      expense: 0,
-      ingridients: ['water', 'sugar', 'coffee'],
-      image: "/content/face.png",
-    },
-
-    {
-      id: 6,
-      name: 'Tea',
-      price: 40,
-      expense: 0,
-      ingridients: ['tea', 'water', 'milk'],
-      image: "/content/face.png",
-    },
-  ];
+  const addToCard = (dish) => {
+    setCard([...card, dish]);
+  };
   // ==========================================
   return (
 
-    <div className="App container mx-auto">
+    <div className={
+      "p-2 min-h-screen " + (themeDark ? "dark bg-slate-300 text-white" : "")
+    }>
 
-      <div>
-        <Menu />
-        <Main />
+      <div className="App container mx-auto">
+        <DarkThemeSwitcher darkTheme={themeDark} setDarkTheme={setDarkTheme} />
+        <div className='container mx-auto grid justify-items-end pr-5'>
+          <div className='text-xl'>Корзина</div>
+          <div>Количество: {card.length}</div>
+          <div>Сумма: {card.reduce((sum, dish) => (sum += dish.price), 0)}руб</div>
+        </div>
+        <div>
+          <Menu onItemBy={(dish) => addToCard(dish)} />
+          <Main />
+        </div>
       </div>
+
+
 
     </div>
   );
