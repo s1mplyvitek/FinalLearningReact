@@ -1,5 +1,4 @@
-
-import DarkThemeIcon from "../../svg/DarkThemeIcon";
+import DarkThemeIcon from "../svg/DarkThemeIcon";
 import style from "./DarkThemeSwitcher.module.css";
 
 const DarkThemeSwitcher = ({ darkTheme, setDarkTheme }) => {

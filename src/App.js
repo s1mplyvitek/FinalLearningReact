@@ -3,6 +3,9 @@ import './App.css';
 import Menu from './components/Menu';
 import Main from './hw1/Main';
 import DarkThemeSwitcher from './components/DarkThemeSwithcer';
+import { Outlet } from 'react-router-dom';
+import MainMenu from './MainMenu';
+import CardWidget from './components/CardWidget';
 
 
 function App() {
@@ -27,18 +30,12 @@ function App() {
 
       <div className="App container mx-auto">
         <DarkThemeSwitcher darkTheme={themeDark} setDarkTheme={setDarkTheme} />
-        <div className='container mx-auto grid justify-items-end pr-5'>
-          <div className='text-xl'>Корзина</div>
-          <div>Количество: {card.length}</div>
-          <div>Сумма: {card.reduce((sum, dish) => (sum += dish.price), 0)}руб</div>
-        </div>
-        <div>
-          <Menu onItemBy={(dish) => addToCard(dish)} />
-          <Main />
-        </div>
+        <MainMenu />
+        <CardWidget card={card} />              
+        <Outlet></Outlet>
+        <Main />
+
       </div>
-
-
 
     </div>
   );
