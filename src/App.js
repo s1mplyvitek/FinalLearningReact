@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import './App.css';
-import Menu from './components/Menu';
 import Main from './hw1/Main';
 import DarkThemeSwitcher from './components/DarkThemeSwithcer';
 import { Outlet } from 'react-router-dom';
 import MainMenu from './MainMenu';
 import CardWidget from './components/CardWidget';
+import CardProvider from './components/providers/CardProvider';
 
 
 function App() {
@@ -16,11 +16,7 @@ function App() {
     setThemeDark(value);
   };
   // =======================================
-  const [card, setCard] = useState([]);
-
-  const addToCard = (dish) => {
-    setCard([...card, dish]);
-  };
+  
   // ==========================================
   return (
 
@@ -31,7 +27,9 @@ function App() {
       <div className="App container mx-auto">
         <DarkThemeSwitcher darkTheme={themeDark} setDarkTheme={setDarkTheme} />
         <MainMenu />
-        <CardWidget card={card} />              
+        <CardProvider>
+          <CardWidget />
+        </CardProvider>                      
         <Outlet></Outlet>
         <Main />
 
