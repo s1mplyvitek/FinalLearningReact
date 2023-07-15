@@ -1,7 +1,9 @@
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import menu from "../../fakeData";
 
-const MenuItemPage = () => {    
+
+const MenuItemPage = () => {
+    const menu = useSelector(state => state.menu)   
     const { id } = useParams();
     let menuItem = menu.find((item) => item.id == id)
     return (

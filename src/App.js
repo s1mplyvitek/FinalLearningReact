@@ -25,8 +25,7 @@ function App() {
     }>
 
       <div className="App container mx-auto">
-        <DarkThemeSwitcher darkTheme={themeDark} setDarkTheme={setDarkTheme} />
-        <MainMenu />
+        <DarkThemeSwitcher darkTheme={themeDark} setDarkTheme={setDarkTheme} />        
         <CardProvider>
           <CardWidget />
         </CardProvider>                      

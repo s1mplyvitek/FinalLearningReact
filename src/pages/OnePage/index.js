@@ -1,7 +1,8 @@
-import menu from "../../fakeData";
+import { useSelector } from "react-redux";
 
-const OnePage = () => {    
-    
+
+const OnePage = () => {
+    const menu = useSelector(state => state.menu)
     let menuItem = menu.find((item) => item.id == 1)
     return (
         <div className="pt-5">
