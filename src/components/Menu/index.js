@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import DishCard from "../DishCard";
 import { useDispatch, useSelector } from "react-redux";
 import { loadMenu } from "../../store/slices/menuSlice";
+import LoadRejec from "../LoadRejec";
+import LoadPend from "../LoadPend";
 
 
 const Menu = () => {
@@ -21,17 +23,9 @@ const Menu = () => {
                 </div>
             )}
 
-            {menu.loading == "pending" && (
-                <div>
-                    Загрузка...
-                </div>
-            )}
+            {menu.loading == "pending" && (<LoadPend />)}
 
-            {menu.loading == "rejected" && (
-                <div>
-                    404
-                </div>
-            )}
+            {menu.loading == "rejected" && (<LoadRejec />)}
         </>
     );
 };
