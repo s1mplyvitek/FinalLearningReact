@@ -1,68 +1,37 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
-let menu = [
+const initialState = {items:[], loading: ""};
 
-    {
-        id: 1,
-        name: 'Buuzas',
-        price: 70,
-        expense: 0,
-        ingridients: ['meat', 'water', 'solt', 'onion', 'dough',],
-        image: "/content/buuza.jpg",
-    },
-
-    {
-        id: 2,
-        name: 'Shulen',
-        price: 100,
-        expense: 0,
-        ingridients: ['meat', 'water', 'solt',],
-        image: "/content/dishK.png",
-    },
-
-    {
-        id: 3,
-        name: 'Brtuch',
-        price: 150,
-        expense: 0,
-        ingridients: ['salad', 'bread', 'meat', 'sauce', 'cheese'],
-        image: "/content/dish2.png",
-    },
-
-    {
-        id: 4,
-        name: 'Classic salad',
-        price: 60,
-        expense: 0,
-        ingridients: ['salad', 'onion', 'solt', 'cucmber', 'tomato'],
-        image: "/content/dish.png",
-    },
-
-    {
-        id: 5,
-        name: 'Cofee',
-        price: 50,
-        expense: 0,
-        ingridients: ['water', 'sugar', 'coffee'],
-        image: "/content/dish.png",
-    },
-
-    {
-        id: 6,
-        name: 'Tea',
-        price: 40,
-        expense: 0,
-        ingridients: ['tea', 'water', 'milk'],
-        image: "/content/dish.png",
-    },
-];
+export const loadMenu = createAsyncThunk(
+    "menu/loadMenu",
+    async () => {
+        return axios
+            .get("/data/menu.json")
+            .then((resp) => resp.data);
+    }
+);
 
 export const menuSlice = createSlice({
     name: "menu",
 
-    initialState: menu,
+    initialState: initialState,
 
     reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(loadMenu.fulfilled, (state, action) => {
+            state.loading = "fulfilld";
+            state.items.length = 0;
+            state.items.push(...action.payload);
+        });
+        builder.addCase(loadMenu.pending, (state, action) => {
+            state.loading = "pending";
+        });
+        builder.addCase(loadMenu.rejected, (state, action) => {
+            state.loading = "rejected";
+        });
+
+    },
 });
 
 export const { } = menuSlice.actions;

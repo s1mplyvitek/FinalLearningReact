@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 const OnePage = () => {
     const menu = useSelector(state => state.menu)
-    let menuItem = menu.find((item) => item.id == 1)
+    let menuItem = menu.items.find((item) => item.id == 1)
     return (
         <div className="pt-5">
             <h1>Про блюдо</h1>

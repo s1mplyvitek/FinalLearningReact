@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 const MenuItemPage = () => {
     const menu = useSelector(state => state.menu)   
     const { id } = useParams();
-    let menuItem = menu.find((item) => item.id == id)
+    let menuItem = menu.items.find((item) => item.id == id)
     return (
         <>
             <h1>Страница товара</h1>
