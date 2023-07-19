@@ -15,7 +15,7 @@ const Menu = () => {
 
     return (
         <>
-            {menu.loading == "fulfilld" && (
+            {menu.loading == "fulfilled" && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 pt-5">
                     {menu.items.map((item) => (
                         <DishCard dish={item} />

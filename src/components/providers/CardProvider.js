@@ -8,8 +8,8 @@ const CardProvider = ({ children }) => {
         localStorage.setItem("card", JSON.stringify(card));
     }, [card]);
 
-    const sum = card.reduce((sum, item) => {
-        sum += item.food.price * item.qty;
+    const sum = card.items.reduce((sum, item) => {
+        sum += item.food.attributes.price * item.qty;
         return sum;
     }, 0);
 

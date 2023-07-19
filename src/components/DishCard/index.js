@@ -9,10 +9,16 @@ const DishCard = ({ dish }) => {
         <div className={" rounded overflow-hidden shadow-lg xl:bg-slate-200 " + style.card}>
             <div>
                 <Link to={`/catalog/${dish.id}`}>
-                    <div><img src={dish.image} className="container object-cover h-96" /></div>
+                    <div>
+                        <img src={
+                            "http://localhost:1337" +
+                            dish?.attributes?.image?.data?.attributes?.formats?.small?.url
+                        }
+                            className="container object-cover h-96" />
+                    </div>
                     <div className="p-2">
-                        <div className="text-3xl">{dish.name}</div>
-                        <div>{dish.ingridients.join(", ")} </div>
+                        <div className="text-3xl">{dish?.attributes?.name} - {dish?.attributes?.price + " rub"}</div>
+                        <div>{dish.attributes.ingridients.join(", ")} </div>                        
                     </div>
                 </Link>
             </div>

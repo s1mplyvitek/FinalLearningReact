@@ -24,7 +24,7 @@ function App() {
       "p-2 min-h-screen " + (themeDark ? "dark bg-slate-300 text-white" : "")
     }>
 
-      <div className="App container mx-auto">
+      <div className="App container mx-auto px-12">
         <DarkThemeSwitcher darkTheme={themeDark} setDarkTheme={setDarkTheme} />        
         <CardProvider>
           <CardWidget />

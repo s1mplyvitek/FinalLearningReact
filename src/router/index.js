@@ -7,6 +7,8 @@ import ReviewsPage from "../pages/ReviewsPage";
 import OnePage from "../pages/OnePage";
 
 import Menu from "../components/Menu";
+import CardPage from "../pages/CardPage";
+import CardProvider from "../components/providers/CardProvider";
 
 const router = createBrowserRouter([
     {
@@ -20,6 +22,12 @@ const router = createBrowserRouter([
             {
                 path: "catalog/:id",
                 element: <MenuItemPage />
+            },
+            {
+                path: "card",
+                element: <CardProvider>
+                            <CardPage />
+                        </CardProvider>
             },
             {
                 path: "about",

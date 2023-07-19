@@ -1,7 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const cardStorageString = localStorage.getItem("card");
-const initialState = [];
+
+const initialState = { loading: "initial", items: [] };
+
+export const makeOrder = createAsyncThunk(
+    "card/makeOrder",
+    async (orderData) => {
+        return axios
+            .post("http://localhost:1337/api/orders", { data: orderData })
+            .then((resp) => resp.data);
+    }
+);
 
 export const cardSlice = createSlice({
     name: "card",
@@ -12,19 +23,32 @@ export const cardSlice = createSlice({
     reducers: {
         addToCard: (state, action) => {
             let itemToAdd = action.payload;
-            let index = state.findIndex(
+            let index = state.items.findIndex(
                 (item) => item.food.id === itemToAdd.id
             );
             if (index >= 0) {
-                state[index].qty++;
+                state.items[index].qty++;
             } else {
-                state.push({ qty: 1, food: itemToAdd });
+                state.items.push({ qty: 1, food: itemToAdd });
             }
 
         },
         clearCard: (state) => {
-            state.length = 0;
+            state.items.length = 0;
         }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(makeOrder.fulfilled, (state, action) => {
+            state.loading = "fulfilled";
+            state.items.length = 0;
+        });
+        builder.addCase(makeOrder.pending, (state, action) => {
+            state.loading = "pending";
+        });
+        builder.addCase(makeOrder.rejected, (state, action) => {
+            state.loading = "rejected";
+        });
+
     },
 });
 

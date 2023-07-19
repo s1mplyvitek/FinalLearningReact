@@ -7,7 +7,7 @@ export const loadMenu = createAsyncThunk(
     "menu/loadMenu",
     async () => {
         return axios
-            .get("/data/menu.json")
+            .get("http://localhost:1337/api/foods?populate=*")
             .then((resp) => resp.data);
     }
 );
@@ -20,9 +20,9 @@ export const menuSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(loadMenu.fulfilled, (state, action) => {
-            state.loading = "fulfilld";
+            state.loading = "fulfilled";
             state.items.length = 0;
-            state.items.push(...action.payload);
+            state.items.push(...action.payload.data);
         });
         builder.addCase(loadMenu.pending, (state, action) => {
             state.loading = "pending";
